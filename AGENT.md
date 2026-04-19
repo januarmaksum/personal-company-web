@@ -22,11 +22,13 @@ Read the relevant file from `.agents/skills/` based on the user's task before wr
 | "Apply a theme / restyle this app"         | `.agents/skills/theme-factory/SKILL.md`            |
 | "State management / Zustand store"         | `.agents/skills/zustand-state-management/SKILL.md` |
 | "UI Components / Design System / shadcn"   | `.agents/skills/shadcn/SKILL.md`                   |
+| "How do I do X / Find extra help"          | `.agents/skills/find-skills/SKILL.md`              |
 
 **Rules:**
 
 1. Read the matching skill file in `.agents/skills/` BEFORE taking action.
 2. If multiple skills apply, read all of them.
 3. Keep your code modular, accessible, and well-designed.
+4. If a prompt is outside the current context or capabilities, use `find-skills` as a last resort to find a relevant skill.
 
 <!-- END:nextjs-agent-rules -->
