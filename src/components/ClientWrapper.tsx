@@ -10,8 +10,8 @@ import {
   useEditorStore,
 } from "@/store/editor/useEditorStore";
 
-import { Renderer } from "./Renderer";
 import { SidebarEditor } from "./SidebarEditor";
+import { Renderer } from "./render";
 
 interface ClientWrapperProps {
   initialData: {

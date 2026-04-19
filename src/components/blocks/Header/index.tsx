@@ -2,10 +2,8 @@ import React from "react";
 
 import { Button } from "@/components/ui/button";
 
-interface HeaderProps {
-  title?: string;
-  logo?: string;
-}
+import "./style.css";
+import { HeaderProps } from "./types";
 
 export const Header: React.FC<HeaderProps> = ({ title, logo }) => {
   return (

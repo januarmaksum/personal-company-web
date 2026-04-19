@@ -10,23 +10,15 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
+import "./style.css";
+import { FeaturesProps } from "./types";
+
 const IconMap = {
   laptop: Laptop,
   smartphone: Smartphone,
   zap: Zap,
   shield: Shield,
 };
-
-interface FeatureItem {
-  icon?: string;
-  title: string;
-  desc: string;
-}
-
-interface FeaturesProps {
-  title?: string;
-  items?: FeatureItem[];
-}
 
 export const Features: React.FC<FeaturesProps> = ({ title, items }) => {
   return (

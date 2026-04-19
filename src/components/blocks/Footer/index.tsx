@@ -1,8 +1,7 @@
 import React from "react";
 
-interface FooterProps {
-  copyright?: string;
-}
+import "./style.css";
+import { FooterProps } from "./types";
 
 export const Footer: React.FC<FooterProps> = ({ copyright }) => {
   return (

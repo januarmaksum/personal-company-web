@@ -2,12 +2,8 @@ import React from "react";
 
 import { Button } from "@/components/ui/button";
 
-interface HeroProps {
-  title?: string;
-  subtitle?: string;
-  ctaText?: string;
-  ctaLink?: string;
-}
+import "./style.css";
+import { HeroProps } from "./types";
 
 export const Hero: React.FC<HeroProps> = ({
   title,
