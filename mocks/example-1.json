@@ -1,0 +1,24 @@
+{
+  "pageId": "home",
+  "theme": "TemplateA",
+  "style": { "primary": "#1f2937", "font": "Inter" },
+  "components": [
+    {
+      "id": "1",
+      "type": "Header",
+      "isLocked": true,
+      "props": { "logo": "...", "title": "My Store" }
+    },
+    {
+      "id": "2",
+      "type": "HeroSection",
+      "isLocked": false,
+      "props": {
+        "heading": "Welcome",
+        "description": "...",
+        "buttonText": "Shop Now"
+      }
+    },
+    { "id": "3", "type": "Footer", "isLocked": true, "props": {} }
+  ]
+}

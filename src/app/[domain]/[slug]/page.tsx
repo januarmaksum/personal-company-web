@@ -1,0 +1,57 @@
+import { notFound } from "next/navigation";
+import { ClientWrapper } from "@/components/ClientWrapper";
+
+interface PageProps {
+  params: Promise<{
+    domain: string;
+    slug: string;
+  }>;
+  searchParams: Promise<{
+    editmode?: string;
+  }>;
+}
+
+export default async function TenantPage({ params, searchParams }: PageProps) {
+  const { domain, slug } = await params;
+  const { editmode } = await searchParams;
+  const isEditMode = editmode === "true";
+
+  // Fetch page data from mock server
+  try {
+    const res = await fetch(`http://localhost:3001/pages?domain=${domain}&slug=${slug}`, {
+      cache: "no-store",
+    });
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch page data");
+    }
+
+    const pages = await res.json();
+    const pageData = pages[0];
+
+    if (!pageData) {
+      return notFound();
+    }
+
+    return (
+      <ClientWrapper 
+        initialData={pageData} 
+        editMode={isEditMode} 
+      />
+    );
+  } catch (error) {
+    console.error("Error fetching page data:", error);
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-red-50 text-red-600 p-8">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold mb-2">Internal Server Error</h1>
+          <p>Please make sure the mock server is running on port 3001.</p>
+          <code className="block mt-4 p-2 bg-red-100 rounded text-sm">
+            npm run mock
+          </code>
+        </div>
+      </div>
+    );
+  }
+}
+
