@@ -15,7 +15,7 @@ import {
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { GripVertical } from "lucide-react";
-import { useEditorStore, ComponentData } from "@/store/useEditorStore";
+import { useEditorStore, ComponentData } from "@/store/editor/useEditorStore";
 import { Header } from "./tenant/Header";
 import { Hero } from "./tenant/Hero";
 import { Features } from "./tenant/Features";

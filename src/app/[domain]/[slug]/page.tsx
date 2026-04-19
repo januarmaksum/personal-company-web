@@ -17,6 +17,7 @@ export default async function TenantPage({ params, searchParams }: PageProps) {
   const isEditMode = editmode === "true";
 
   // Fetch page data from mock server
+  let pageData;
   try {
     const res = await fetch(`http://localhost:3001/pages?domain=${domain}&slug=${slug}`, {
       cache: "no-store",
@@ -27,18 +28,7 @@ export default async function TenantPage({ params, searchParams }: PageProps) {
     }
 
     const pages = await res.json();
-    const pageData = pages[0];
-
-    if (!pageData) {
-      return notFound();
-    }
-
-    return (
-      <ClientWrapper 
-        initialData={pageData} 
-        editMode={isEditMode} 
-      />
-    );
+    pageData = pages[0];
   } catch (error) {
     console.error("Error fetching page data:", error);
     return (
@@ -53,5 +43,16 @@ export default async function TenantPage({ params, searchParams }: PageProps) {
       </div>
     );
   }
+
+  if (!pageData) {
+    return notFound();
+  }
+
+  return (
+    <ClientWrapper 
+      initialData={pageData} 
+      editMode={isEditMode} 
+    />
+  );
 }
 

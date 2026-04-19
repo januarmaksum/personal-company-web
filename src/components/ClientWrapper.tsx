@@ -4,9 +4,9 @@ import {
   ComponentData,
   PageConfig,
   useEditorStore,
-} from "@/store/useEditorStore";
+} from "@/store/editor/useEditorStore";
 import { Settings } from "lucide-react";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { Renderer } from "./Renderer";
 import { SidebarEditor } from "./SidebarEditor";
 
@@ -27,7 +27,6 @@ export const ClientWrapper: React.FC<ClientWrapperProps> = ({
 }) => {
   const setPageData = useEditorStore((state) => state.setPageData);
   const components = useEditorStore((state) => state.components);
-  const config = useEditorStore((state) => state.config);
   const isSidebarOpen = useEditorStore((state) => state.isSidebarOpen);
   const toggleSidebar = useEditorStore((state) => state.toggleSidebar);
   const hasHydrated = useEditorStore((state) => state._hasHydrated);
@@ -47,7 +46,6 @@ export const ClientWrapper: React.FC<ClientWrapperProps> = ({
   // Use the data from Zustand if hydrated and matches current page, otherwise fallback to SSR data
   const canUseStore = hasHydrated && storePageId === initialData.id;
   const activeComponents = canUseStore ? components : initialData.components;
-  const activeConfig = canUseStore ? config : initialData.config;
 
   return (
     <div

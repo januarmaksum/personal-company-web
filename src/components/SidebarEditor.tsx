@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
-import { useEditorStore } from "@/store/useEditorStore";
+import { useEditorStore } from "@/store/editor/useEditorStore";
 import { useShallow } from "zustand/shallow";
 import {
   ChevronDown,
