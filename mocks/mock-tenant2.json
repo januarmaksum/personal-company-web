@@ -19,7 +19,11 @@
           "id": "t2-home-hero",
           "type": "Hero",
           "isLocked": false,
-          "props": { "title": "Hi, I am Jane", "subtitle": "Welcome to my portfolio", "ctaText": "View Works" }
+          "props": {
+            "title": "Hi, I am Jane",
+            "subtitle": "Welcome to my portfolio",
+            "ctaText": "View Works"
+          }
         },
         {
           "id": "t2-home-footer",
@@ -35,7 +39,10 @@
       "slug": "about",
       "config": {
         "theme": { "primary": "#10b981", "font": "Roboto" },
-        "metadata": { "title": "Tenant 2 - About Me", "description": "My journey" }
+        "metadata": {
+          "title": "Tenant 2 - About Me",
+          "description": "My journey"
+        }
       },
       "components": [
         {
@@ -48,7 +55,11 @@
           "id": "t2-about-hero",
           "type": "Hero",
           "isLocked": false,
-          "props": { "title": "About Me", "subtitle": "I am a fullstack web developer.", "ctaText": "Download CV" }
+          "props": {
+            "title": "About Me",
+            "subtitle": "I am a fullstack web developer.",
+            "ctaText": "Download CV"
+          }
         },
         {
           "id": "t2-about-footer",

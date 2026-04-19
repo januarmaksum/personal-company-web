@@ -1,6 +1,14 @@
 import React from "react";
-import { Laptop, Smartphone, Zap, Shield } from "lucide-react";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
+
+import { Laptop, Shield, Smartphone, Zap } from "lucide-react";
+
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 const IconMap = {
   laptop: Laptop,
@@ -22,22 +30,25 @@ interface FeaturesProps {
 
 export const Features: React.FC<FeaturesProps> = ({ title, items }) => {
   return (
-    <section className="w-full py-24 px-6 md:px-12 bg-muted/30">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
+    <section className="bg-muted/30 w-full px-6 py-24 md:px-12">
+      <div className="mx-auto max-w-7xl">
+        <div className="mb-16 text-center">
+          <h2 className="mb-4 text-3xl font-bold tracking-tight md:text-4xl">
             {title || "Why Choose Us"}
           </h2>
-          <div className="w-20 h-1.5 bg-primary mx-auto rounded-full"></div>
+          <div className="bg-primary mx-auto h-1.5 w-20 rounded-full"></div>
         </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
           {(items || []).map((item, idx) => {
             const Icon = IconMap[item.icon as keyof typeof IconMap] || Zap;
             return (
-              <Card key={idx} className="hover:shadow-lg hover:-translate-y-1 transition-all duration-300 border-none shadow-sm">
+              <Card
+                key={idx}
+                className="border-none shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+              >
                 <CardHeader>
-                  <div className="w-12 h-12 bg-primary/10 text-primary rounded-xl flex items-center justify-center mb-4">
+                  <div className="bg-primary/10 text-primary mb-4 flex h-12 w-12 items-center justify-center rounded-xl">
                     <Icon size={24} />
                   </div>
                   <CardTitle className="text-xl">{item.title}</CardTitle>

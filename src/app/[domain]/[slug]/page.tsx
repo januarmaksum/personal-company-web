@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+
 import { ClientWrapper } from "@/components/ClientWrapper";
 
 interface PageProps {
@@ -19,9 +20,12 @@ export default async function TenantPage({ params, searchParams }: PageProps) {
   // Fetch page data from mock server
   let pageData;
   try {
-    const res = await fetch(`http://localhost:3001/pages?domain=${domain}&slug=${slug}`, {
-      cache: "no-store",
-    });
+    const res = await fetch(
+      `http://localhost:3001/pages?domain=${domain}&slug=${slug}`,
+      {
+        cache: "no-store",
+      },
+    );
 
     if (!res.ok) {
       throw new Error("Failed to fetch page data");
@@ -32,11 +36,11 @@ export default async function TenantPage({ params, searchParams }: PageProps) {
   } catch (error) {
     console.error("Error fetching page data:", error);
     return (
-      <div className="flex items-center justify-center min-h-screen bg-red-50 text-red-600 p-8">
+      <div className="flex min-h-screen items-center justify-center bg-red-50 p-8 text-red-600">
         <div className="text-center">
-          <h1 className="text-2xl font-bold mb-2">Internal Server Error</h1>
+          <h1 className="mb-2 text-2xl font-bold">Internal Server Error</h1>
           <p>Please make sure the mock server is running on port 3001.</p>
-          <code className="block mt-4 p-2 bg-red-100 rounded text-sm">
+          <code className="mt-4 block rounded bg-red-100 p-2 text-sm">
             npm run mock
           </code>
         </div>
@@ -48,11 +52,5 @@ export default async function TenantPage({ params, searchParams }: PageProps) {
     return notFound();
   }
 
-  return (
-    <ClientWrapper 
-      initialData={pageData} 
-      editMode={isEditMode} 
-    />
-  );
+  return <ClientWrapper initialData={pageData} editMode={isEditMode} />;
 }
-

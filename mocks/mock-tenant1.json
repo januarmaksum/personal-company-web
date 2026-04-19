@@ -6,7 +6,10 @@
       "slug": "home",
       "config": {
         "theme": { "primary": "#3b82f6", "font": "Inter" },
-        "metadata": { "title": "Tenant 1 - Home", "description": "Welcome to our store" }
+        "metadata": {
+          "title": "Tenant 1 - Home",
+          "description": "Welcome to our store"
+        }
       },
       "components": [
         {
@@ -19,13 +22,22 @@
           "id": "t1-home-hero",
           "type": "Hero",
           "isLocked": false,
-          "props": { "title": "Welcome Home", "subtitle": "This is our homepage.", "ctaText": "Shop Now" }
+          "props": {
+            "title": "Welcome Home",
+            "subtitle": "This is our homepage.",
+            "ctaText": "Shop Now"
+          }
         },
         {
           "id": "t1-home-features",
           "type": "Features",
           "isLocked": false,
-          "props": { "title": "Featured Highlights", "items": [{"icon": "zap", "title": "Fast", "desc": "Very fast service."}] }
+          "props": {
+            "title": "Featured Highlights",
+            "items": [
+              { "icon": "zap", "title": "Fast", "desc": "Very fast service." }
+            ]
+          }
         },
         {
           "id": "t1-home-footer",
@@ -41,7 +53,10 @@
       "slug": "about",
       "config": {
         "theme": { "primary": "#3b82f6", "font": "Inter" },
-        "metadata": { "title": "Tenant 1 - About Us", "description": "Learn more about our agency" }
+        "metadata": {
+          "title": "Tenant 1 - About Us",
+          "description": "Learn more about our agency"
+        }
       },
       "components": [
         {
@@ -54,7 +69,11 @@
           "id": "t1-about-hero",
           "type": "Hero",
           "isLocked": false,
-          "props": { "title": "About Us", "subtitle": "Our story and mission.", "ctaText": "Contact Us" }
+          "props": {
+            "title": "About Us",
+            "subtitle": "Our story and mission.",
+            "ctaText": "Contact Us"
+          }
         },
         {
           "id": "t1-about-footer",
@@ -70,7 +89,10 @@
       "slug": "product",
       "config": {
         "theme": { "primary": "#3b82f6", "font": "Inter" },
-        "metadata": { "title": "Tenant 1 - Products", "description": "Browse our latest products" }
+        "metadata": {
+          "title": "Tenant 1 - Products",
+          "description": "Browse our latest products"
+        }
       },
       "components": [
         {
@@ -83,7 +105,11 @@
           "id": "t1-product-hero",
           "type": "Hero",
           "isLocked": false,
-          "props": { "title": "Our Products", "subtitle": "Quality items at affordable prices.", "ctaText": "Buy Now" }
+          "props": {
+            "title": "Our Products",
+            "subtitle": "Quality items at affordable prices.",
+            "ctaText": "Buy Now"
+          }
         },
         {
           "id": "t1-product-footer",
@@ -99,7 +125,10 @@
       "slug": "contact",
       "config": {
         "theme": { "primary": "#3b82f6", "font": "Inter" },
-        "metadata": { "title": "Tenant 1 - Contact", "description": "Get in touch with us" }
+        "metadata": {
+          "title": "Tenant 1 - Contact",
+          "description": "Get in touch with us"
+        }
       },
       "components": [
         {
@@ -112,7 +141,11 @@
           "id": "t1-contact-hero",
           "type": "Hero",
           "isLocked": false,
-          "props": { "title": "Contact Us", "subtitle": "We'd love to hear from you.", "ctaText": "Email Us" }
+          "props": {
+            "title": "Contact Us",
+            "subtitle": "We'd love to hear from you.",
+            "ctaText": "Email Us"
+          }
         },
         {
           "id": "t1-contact-footer",

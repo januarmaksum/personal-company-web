@@ -22,13 +22,19 @@ export interface EditorState {
   slug: string | null;
   config: PageConfig | null;
   components: ComponentData[];
-  
+
   isSidebarOpen: boolean;
   _hasHydrated: boolean;
-  
+
   // Actions
   setHasHydrated: (state: boolean) => void;
-  setPageData: (data: { id: string; domain: string; slug: string; config: PageConfig; components: ComponentData[] }) => void;
+  setPageData: (data: {
+    id: string;
+    domain: string;
+    slug: string;
+    config: PageConfig;
+    components: ComponentData[];
+  }) => void;
   updateComponentProps: (id: string, props: Record<string, unknown>) => void;
   moveComponent: (fromIndex: number, toIndex: number) => void;
   addComponent: (component: ComponentData) => void;

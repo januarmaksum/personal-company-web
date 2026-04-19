@@ -1,4 +1,5 @@
 import React from "react";
+
 import { Button } from "@/components/ui/button";
 
 interface HeaderProps {
@@ -8,12 +9,18 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ title, logo }) => {
   return (
-    <header className="w-full bg-background border-b py-4 px-6 md:px-12 flex items-center justify-between sticky top-0 z-50">
+    <header className="bg-background sticky top-0 z-50 flex w-full items-center justify-between border-b px-6 py-4 md:px-12">
       <div className="flex items-center gap-3">
-        {logo && <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-primary-foreground font-bold">A</div>}
-        <span className="text-xl font-bold tracking-tight">{title || "Brand"}</span>
+        {logo && (
+          <div className="bg-primary text-primary-foreground flex h-8 w-8 items-center justify-center rounded-lg font-bold">
+            A
+          </div>
+        )}
+        <span className="text-xl font-bold tracking-tight">
+          {title || "Brand"}
+        </span>
       </div>
-      <nav className="hidden md:flex items-center gap-2">
+      <nav className="hidden items-center gap-2 md:flex">
         <Button variant="ghost">Home</Button>
         <Button variant="ghost">Services</Button>
         <Button variant="ghost">About</Button>
@@ -22,4 +29,3 @@ export const Header: React.FC<HeaderProps> = ({ title, logo }) => {
     </header>
   );
 };
-

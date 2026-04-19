@@ -1,25 +1,28 @@
 import React from "react";
-import { 
-  DndContext, 
-  closestCenter,
+
+import {
+  DndContext,
+  DragEndEvent,
   KeyboardSensor,
   PointerSensor,
+  closestCenter,
   useSensor,
   useSensors,
-  DragEndEvent
 } from "@dnd-kit/core";
 import {
   SortableContext,
+  useSortable,
   verticalListSortingStrategy,
-  useSortable
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { GripVertical } from "lucide-react";
-import { useEditorStore, ComponentData } from "@/store/editor/useEditorStore";
-import { Header } from "./tenant/Header";
-import { Hero } from "./tenant/Hero";
+
+import { ComponentData, useEditorStore } from "@/store/editor/useEditorStore";
+
 import { Features } from "./tenant/Features";
 import { Footer } from "./tenant/Footer";
+import { Header } from "./tenant/Header";
+import { Hero } from "./tenant/Hero";
 
 const ComponentMap = {
   Header,
@@ -34,15 +37,19 @@ interface SortableItemProps {
   editMode?: boolean;
 }
 
-const SortableItem: React.FC<SortableItemProps> = ({ id, component, editMode }) => {
+const SortableItem: React.FC<SortableItemProps> = ({
+  id,
+  component,
+  editMode,
+}) => {
   const {
     attributes,
     listeners,
     setNodeRef,
     transform,
     transition,
-    isDragging
-  } = useSortable({ 
+    isDragging,
+  } = useSortable({
     id,
     disabled: component.isLocked || !editMode,
   });
@@ -53,22 +60,23 @@ const SortableItem: React.FC<SortableItemProps> = ({ id, component, editMode }) 
     zIndex: isDragging ? 50 : "auto",
   };
 
-  const ComponentToRender = ComponentMap[component.type as keyof typeof ComponentMap];
-  
+  const ComponentToRender =
+    ComponentMap[component.type as keyof typeof ComponentMap];
+
   if (!ComponentToRender) return null;
 
   return (
-    <div ref={setNodeRef} style={style} className="relative group">
+    <div ref={setNodeRef} style={style} className="group relative">
       {editMode && !component.isLocked && (
-        <div 
-          {...attributes} 
+        <div
+          {...attributes}
           {...listeners}
-          className="absolute top-4 left-4 z-10 p-2 bg-background border rounded-md shadow-sm cursor-grab opacity-0 group-hover:opacity-100 transition-opacity hover:bg-accent text-muted-foreground"
+          className="bg-background hover:bg-accent text-muted-foreground absolute top-4 left-4 z-10 cursor-grab rounded-md border p-2 opacity-0 shadow-sm transition-opacity group-hover:opacity-100"
         >
           <GripVertical size={16} />
         </div>
       )}
-      <div className={isDragging ? "opacity-50 pointer-events-none" : ""}>
+      <div className={isDragging ? "pointer-events-none opacity-50" : ""}>
         <ComponentToRender {...component.props} />
       </div>
     </div>
@@ -90,12 +98,12 @@ export const Renderer: React.FC<RendererProps> = ({ components, editMode }) => {
         distance: 5,
       },
     }),
-    useSensor(KeyboardSensor)
+    useSensor(KeyboardSensor),
   );
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
-    
+
     if (over && active.id !== over.id) {
       const oldIndex = components.findIndex((c) => c.id === active.id);
       const newIndex = components.findIndex((c) => c.id === over.id);
@@ -105,9 +113,10 @@ export const Renderer: React.FC<RendererProps> = ({ components, editMode }) => {
 
   if (!editMode) {
     return (
-      <div className="flex flex-col w-full min-h-full">
+      <div className="flex min-h-full w-full flex-col">
         {components.map((component) => {
-          const ComponentToRender = ComponentMap[component.type as keyof typeof ComponentMap];
+          const ComponentToRender =
+            ComponentMap[component.type as keyof typeof ComponentMap];
           if (!ComponentToRender) return null;
           return <ComponentToRender key={component.id} {...component.props} />;
         })}
@@ -115,7 +124,7 @@ export const Renderer: React.FC<RendererProps> = ({ components, editMode }) => {
     );
   }
 
-  const items = components.map(c => c.id);
+  const items = components.map((c) => c.id);
 
   return (
     <DndContext
@@ -124,16 +133,13 @@ export const Renderer: React.FC<RendererProps> = ({ components, editMode }) => {
       collisionDetection={closestCenter}
       onDragEnd={handleDragEnd}
     >
-      <div className="flex flex-col w-full min-h-full">
-        <SortableContext 
-          items={items}
-          strategy={verticalListSortingStrategy}
-        >
+      <div className="flex min-h-full w-full flex-col">
+        <SortableContext items={items} strategy={verticalListSortingStrategy}>
           {components.map((component) => (
-            <SortableItem 
-              key={component.id} 
-              id={component.id} 
-              component={component} 
+            <SortableItem
+              key={component.id}
+              id={component.id}
+              component={component}
               editMode={editMode}
             />
           ))}
@@ -142,4 +148,3 @@ export const Renderer: React.FC<RendererProps> = ({ components, editMode }) => {
     </DndContext>
   );
 };
-

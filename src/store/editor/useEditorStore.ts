@@ -1,6 +1,7 @@
-import { create } from "zustand";
-import { persist, createJSONStorage } from "zustand/middleware";
 import { arrayMove } from "@dnd-kit/sortable";
+import { create } from "zustand";
+import { createJSONStorage, persist } from "zustand/middleware";
+
 import { EditorState } from "./types";
 
 export const useEditorStore = create<EditorState>()(
@@ -16,42 +17,48 @@ export const useEditorStore = create<EditorState>()(
 
       setHasHydrated: (hydrated) => set({ _hasHydrated: hydrated }),
 
-      setPageData: (data) => set({ 
-        pageId: data.id, 
-        domain: data.domain, 
-        slug: data.slug, 
-        config: data.config, 
-        components: data.components 
-      }),
+      setPageData: (data) =>
+        set({
+          pageId: data.id,
+          domain: data.domain,
+          slug: data.slug,
+          config: data.config,
+          components: data.components,
+        }),
 
-      updateComponentProps: (id, props) => set((state) => ({
-        components: state.components.map((c) => 
-          c.id === id ? { ...c, props: { ...c.props, ...props } } : c
-        )
-      })),
+      updateComponentProps: (id, props) =>
+        set((state) => ({
+          components: state.components.map((c) =>
+            c.id === id ? { ...c, props: { ...c.props, ...props } } : c,
+          ),
+        })),
 
-      moveComponent: (fromIndex, toIndex) => set((state) => {
-        // Prevent moving locked elements
-        const compToMove = state.components[fromIndex];
-        const targetComp = state.components[toIndex];
-        if (compToMove.isLocked || targetComp.isLocked) {
-          return state;
-        }
+      moveComponent: (fromIndex, toIndex) =>
+        set((state) => {
+          // Prevent moving locked elements
+          const compToMove = state.components[fromIndex];
+          const targetComp = state.components[toIndex];
+          if (compToMove.isLocked || targetComp.isLocked) {
+            return state;
+          }
 
-        return {
-          components: arrayMove(state.components, fromIndex, toIndex)
-        };
-      }),
+          return {
+            components: arrayMove(state.components, fromIndex, toIndex),
+          };
+        }),
 
-      addComponent: (component) => set((state) => ({
-        components: [...state.components, component]
-      })),
+      addComponent: (component) =>
+        set((state) => ({
+          components: [...state.components, component],
+        })),
 
-      removeComponent: (id) => set((state) => ({
-        components: state.components.filter((c) => c.id !== id)
-      })),
+      removeComponent: (id) =>
+        set((state) => ({
+          components: state.components.filter((c) => c.id !== id),
+        })),
 
-      toggleSidebar: () => set((state) => ({ isSidebarOpen: !state.isSidebarOpen })),
+      toggleSidebar: () =>
+        set((state) => ({ isSidebarOpen: !state.isSidebarOpen })),
     }),
     {
       name: "tenant-editor-storage",
@@ -63,10 +70,10 @@ export const useEditorStore = create<EditorState>()(
       partialize: (state) => ({
         components: state.components,
         config: state.config,
-        pageId: state.pageId
+        pageId: state.pageId,
       }),
-    }
-  )
+    },
+  ),
 );
 
 // Export types for convenience

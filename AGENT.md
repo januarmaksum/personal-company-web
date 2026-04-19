@@ -14,13 +14,13 @@ You are a senior frontend engineer and UI/UX designer.
 
 Read the relevant file from `.agents/skills/` based on the user's task before writing code:
 
-| Task Type                                  | Relevant Skill File                   |
-| ------------------------------------------ | ------------------------------------- |
-| "Build a single page / component / UI"     | `.agents/skills/frontend-design/SKILL.md`       |
-| "Build a complex app with many components" | `.agents/skills/web-artifacts-builder/SKILL.md` |
-| "Create a poster / visual / graphic"       | `.agents/skills/canvas-design/SKILL.md`         |
-| "Apply a theme / restyle this app"         | `.agents/skills/theme-factory/SKILL.md`         |
-| "State management / Zustand store"          | `.agents/skills/zustand-state-management/SKILL.md` |
+| Task Type                                  | Relevant Skill File                                |
+| ------------------------------------------ | -------------------------------------------------- |
+| "Build a single page / component / UI"     | `.agents/skills/frontend-design/SKILL.md`          |
+| "Build a complex app with many components" | `.agents/skills/web-artifacts-builder/SKILL.md`    |
+| "Create a poster / visual / graphic"       | `.agents/skills/canvas-design/SKILL.md`            |
+| "Apply a theme / restyle this app"         | `.agents/skills/theme-factory/SKILL.md`            |
+| "State management / Zustand store"         | `.agents/skills/zustand-state-management/SKILL.md` |
 
 **Rules:**
 

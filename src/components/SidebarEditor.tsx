@@ -1,12 +1,7 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Separator } from "@/components/ui/separator";
-import { useEditorStore } from "@/store/editor/useEditorStore";
-import { useShallow } from "zustand/shallow";
+import React, { useState } from "react";
+
 import {
   ChevronDown,
   ChevronRight,
@@ -18,7 +13,14 @@ import {
   Settings,
   Trash2,
 } from "lucide-react";
-import React, { useState } from "react";
+import { useShallow } from "zustand/shallow";
+
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Separator } from "@/components/ui/separator";
+import { useEditorStore } from "@/store/editor/useEditorStore";
 
 export const SidebarEditor: React.FC = () => {
   const {
@@ -38,7 +40,7 @@ export const SidebarEditor: React.FC = () => {
       domain: state.domain,
       slug: state.slug,
       toggleSidebar: state.toggleSidebar,
-    }))
+    })),
   );
 
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -78,22 +80,22 @@ export const SidebarEditor: React.FC = () => {
   };
 
   return (
-    <aside className="w-80 bg-background border-l h-full flex flex-col shadow-xl z-20">
+    <aside className="bg-background z-20 flex h-full w-80 flex-col border-l shadow-xl">
       {/* Header */}
-      <div className="p-4 border-b flex items-center justify-between sticky top-0 bg-background/95 backdrop-blur z-10">
+      <div className="bg-background/95 sticky top-0 z-10 flex items-center justify-between border-b p-4 backdrop-blur">
         <div className="flex items-center gap-3">
           <Button
             variant="ghost"
             size="icon"
             onClick={toggleSidebar}
             title="Collapse Sidebar"
-            className="h-8 w-8 text-muted-foreground hover:text-foreground"
+            className="text-muted-foreground hover:text-foreground h-8 w-8"
           >
             <PanelRightClose size={18} />
           </Button>
           <div>
             <h2 className="text-xl font-bold tracking-tight">Editor</h2>
-            <p className="text-xs text-muted-foreground uppercase tracking-wider mt-0.5">
+            <p className="text-muted-foreground mt-0.5 text-xs tracking-wider uppercase">
               {domain} / {slug}
             </p>
           </div>
@@ -104,16 +106,16 @@ export const SidebarEditor: React.FC = () => {
           size="icon"
           title="Save Changes"
         >
-          <Save className={`w-4 h-4 ${isSaving ? "animate-spin" : ""}`} />
+          <Save className={`h-4 w-4 ${isSaving ? "animate-spin" : ""}`} />
         </Button>
       </div>
 
       <ScrollArea className="flex-1 p-4">
         {/* Site Config Section */}
         <div className="mb-6">
-          <div className="flex items-center gap-2 mb-3 text-primary">
+          <div className="text-primary mb-3 flex items-center gap-2">
             <Settings size={16} />
-            <h3 className="font-semibold text-sm uppercase tracking-widest text-muted-foreground">
+            <h3 className="text-muted-foreground text-sm font-semibold tracking-widest uppercase">
               Site Config
             </h3>
           </div>
@@ -133,10 +135,10 @@ export const SidebarEditor: React.FC = () => {
 
         {/* Navigator Section */}
         <div className="mb-6">
-          <div className="flex items-center justify-between mb-3">
-            <div className="flex items-center gap-2 text-primary">
+          <div className="mb-3 flex items-center justify-between">
+            <div className="text-primary flex items-center gap-2">
               <Layout size={16} />
-              <h3 className="font-semibold text-sm uppercase tracking-widest text-muted-foreground">
+              <h3 className="text-muted-foreground text-sm font-semibold tracking-widest uppercase">
                 Navigator
               </h3>
             </div>
@@ -150,7 +152,7 @@ export const SidebarEditor: React.FC = () => {
               <div
                 key={comp.id}
                 onClick={() => setSelectedId(comp.id)}
-                className={`group flex items-center justify-between p-2 rounded-md cursor-pointer transition-colors ${
+                className={`group flex cursor-pointer items-center justify-between rounded-md p-2 transition-colors ${
                   selectedId === comp.id
                     ? "bg-accent text-accent-foreground font-medium"
                     : "hover:bg-muted text-muted-foreground"
@@ -180,7 +182,7 @@ export const SidebarEditor: React.FC = () => {
                       e.stopPropagation();
                       removeComponent(comp.id);
                     }}
-                    className="opacity-0 group-hover:opacity-100 h-6 w-6 text-muted-foreground hover:text-destructive transition-all"
+                    className="text-muted-foreground hover:text-destructive h-6 w-6 opacity-0 transition-all group-hover:opacity-100"
                   >
                     <Trash2 size={14} />
                   </Button>
@@ -195,9 +197,9 @@ export const SidebarEditor: React.FC = () => {
           <>
             <Separator className="my-6" />
             <div>
-              <div className="flex items-center gap-2 mb-4 text-primary">
+              <div className="text-primary mb-4 flex items-center gap-2">
                 <Palette size={16} />
-                <h3 className="font-semibold text-sm uppercase tracking-widest text-muted-foreground">
+                <h3 className="text-muted-foreground text-sm font-semibold tracking-widest uppercase">
                   Inspector
                 </h3>
               </div>
@@ -217,7 +219,7 @@ export const SidebarEditor: React.FC = () => {
                         }
                       />
                     ) : (
-                      <div className="text-xs text-muted-foreground italic bg-muted p-2 rounded-md">
+                      <div className="text-muted-foreground bg-muted rounded-md p-2 text-xs italic">
                         Nested properties not editable yet
                       </div>
                     )}
