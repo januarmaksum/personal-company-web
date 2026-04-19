@@ -18,6 +18,7 @@ interface ClientWrapperProps {
     id: string;
     domain: string;
     slug: string;
+    theme?: string;
     config: PageConfig;
     components: ComponentData[];
   };

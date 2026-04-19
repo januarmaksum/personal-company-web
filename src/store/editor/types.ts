@@ -6,10 +6,6 @@ export interface ComponentData {
 }
 
 export interface PageConfig {
-  theme: {
-    primary: string;
-    font: string;
-  };
   metadata: {
     title: string;
     description: string;
@@ -20,6 +16,7 @@ export interface EditorState {
   pageId: string | null;
   domain: string | null;
   slug: string | null;
+  theme: string | null;
   config: PageConfig | null;
   components: ComponentData[];
 
@@ -32,6 +29,7 @@ export interface EditorState {
     id: string;
     domain: string;
     slug: string;
+    theme?: string;
     config: PageConfig;
     components: ComponentData[];
   }) => void;

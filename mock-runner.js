@@ -16,7 +16,12 @@ fs.readdirSync(mocksDir).forEach((file) => {
         fs.readFileSync(path.join(mocksDir, file), "utf8"),
       );
       if (data.pages && Array.isArray(data.pages)) {
-        db.pages = [...db.pages, ...data.pages];
+        // Inject root-level theme into each page
+        const pagesWithTheme = data.pages.map((page) => ({
+          ...page,
+          theme: data.theme || "TemplateA", // Default to TemplateA if not specified
+        }));
+        db.pages = [...db.pages, ...pagesWithTheme];
       }
     } catch (err) {
       console.error(`Error reading ${file}:`, err);

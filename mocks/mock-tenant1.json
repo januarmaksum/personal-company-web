@@ -1,11 +1,11 @@
 {
+  "theme": "TemplateA",
   "pages": [
     {
       "id": "tenant1-home",
       "domain": "tenant1.localhost",
       "slug": "home",
       "config": {
-        "theme": { "primary": "#3b82f6", "font": "Inter" },
         "metadata": {
           "title": "Tenant 1 - Home",
           "description": "Welcome to our store"
@@ -52,7 +52,6 @@
       "domain": "tenant1.localhost",
       "slug": "about",
       "config": {
-        "theme": { "primary": "#3b82f6", "font": "Inter" },
         "metadata": {
           "title": "Tenant 1 - About Us",
           "description": "Learn more about our agency"
@@ -88,7 +87,6 @@
       "domain": "tenant1.localhost",
       "slug": "product",
       "config": {
-        "theme": { "primary": "#3b82f6", "font": "Inter" },
         "metadata": {
           "title": "Tenant 1 - Products",
           "description": "Browse our latest products"
@@ -124,7 +122,6 @@
       "domain": "tenant1.localhost",
       "slug": "contact",
       "config": {
-        "theme": { "primary": "#3b82f6", "font": "Inter" },
         "metadata": {
           "title": "Tenant 1 - Contact",
           "description": "Get in touch with us"

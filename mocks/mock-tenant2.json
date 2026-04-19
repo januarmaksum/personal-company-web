@@ -1,11 +1,11 @@
 {
+  "theme": "TemplateA",
   "pages": [
     {
       "id": "tenant2-home",
       "domain": "tenant2.localhost",
       "slug": "home",
       "config": {
-        "theme": { "primary": "#10b981", "font": "Roboto" },
         "metadata": { "title": "Tenant 2 - Home", "description": "Welcome" }
       },
       "components": [
@@ -38,7 +38,6 @@
       "domain": "tenant2.localhost",
       "slug": "about",
       "config": {
-        "theme": { "primary": "#10b981", "font": "Roboto" },
         "metadata": {
           "title": "Tenant 2 - About Me",
           "description": "My journey"

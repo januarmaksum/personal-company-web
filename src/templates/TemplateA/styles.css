@@ -1,0 +1,19 @@
+.template-a {
+  --primary: #3b82f6;
+  --primary-foreground: #ffffff;
+  --secondary: #1f2937;
+  --accent: #f59e0b;
+  font-family: "Inter", sans-serif;
+}
+
+.template-a .bg-primary {
+  background-color: var(--primary);
+}
+
+.template-a .text-primary {
+  color: var(--primary);
+}
+
+.template-a .border-primary {
+  border-color: var(--primary);
+}

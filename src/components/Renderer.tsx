@@ -18,6 +18,7 @@ import { CSS } from "@dnd-kit/utilities";
 import { GripVertical } from "lucide-react";
 
 import { ComponentData, useEditorStore } from "@/store/editor/useEditorStore";
+import { TemplateRegistry } from "@/templates";
 
 import { Features } from "./tenant/Features";
 import { Footer } from "./tenant/Footer";
@@ -90,6 +91,7 @@ interface RendererProps {
 
 export const Renderer: React.FC<RendererProps> = ({ components, editMode }) => {
   const moveComponent = useEditorStore((state) => state.moveComponent);
+  const theme = useEditorStore((state) => state.theme);
   const dndId = React.useId();
 
   const sensors = useSensors(
@@ -111,22 +113,11 @@ export const Renderer: React.FC<RendererProps> = ({ components, editMode }) => {
     }
   };
 
-  if (!editMode) {
-    return (
-      <div className="flex min-h-full w-full flex-col">
-        {components.map((component) => {
-          const ComponentToRender =
-            ComponentMap[component.type as keyof typeof ComponentMap];
-          if (!ComponentToRender) return null;
-          return <ComponentToRender key={component.id} {...component.props} />;
-        })}
-      </div>
-    );
-  }
+  const Template =
+    TemplateRegistry[theme as keyof typeof TemplateRegistry] ||
+    TemplateRegistry.TemplateA;
 
-  const items = components.map((c) => c.id);
-
-  return (
+  const content = editMode ? (
     <DndContext
       id={dndId}
       sensors={sensors}
@@ -134,7 +125,10 @@ export const Renderer: React.FC<RendererProps> = ({ components, editMode }) => {
       onDragEnd={handleDragEnd}
     >
       <div className="flex min-h-full w-full flex-col">
-        <SortableContext items={items} strategy={verticalListSortingStrategy}>
+        <SortableContext
+          items={components.map((c) => c.id)}
+          strategy={verticalListSortingStrategy}
+        >
           {components.map((component) => (
             <SortableItem
               key={component.id}
@@ -146,5 +140,16 @@ export const Renderer: React.FC<RendererProps> = ({ components, editMode }) => {
         </SortableContext>
       </div>
     </DndContext>
+  ) : (
+    <div className="flex min-h-full w-full flex-col">
+      {components.map((component) => {
+        const ComponentToRender =
+          ComponentMap[component.type as keyof typeof ComponentMap];
+        if (!ComponentToRender) return null;
+        return <ComponentToRender key={component.id} {...component.props} />;
+      })}
+    </div>
   );
+
+  return <Template>{content}</Template>;
 };
