@@ -1,0 +1,126 @@
+{
+  "pages": [
+    {
+      "id": "tenant1-home",
+      "domain": "tenant1.localhost",
+      "slug": "home",
+      "config": {
+        "theme": { "primary": "#3b82f6", "font": "Inter" },
+        "metadata": { "title": "Tenant 1 - Home", "description": "Welcome to our store" }
+      },
+      "components": [
+        {
+          "id": "t1-home-header",
+          "type": "Header",
+          "isLocked": true,
+          "props": { "title": "AgencyOne", "logo": "/logo.png" }
+        },
+        {
+          "id": "t1-home-hero",
+          "type": "Hero",
+          "isLocked": false,
+          "props": { "title": "Welcome Home", "subtitle": "This is our homepage.", "ctaText": "Shop Now" }
+        },
+        {
+          "id": "t1-home-features",
+          "type": "Features",
+          "isLocked": false,
+          "props": { "title": "Featured Highlights", "items": [{"icon": "zap", "title": "Fast", "desc": "Very fast service."}] }
+        },
+        {
+          "id": "t1-home-footer",
+          "type": "Footer",
+          "isLocked": true,
+          "props": { "copyright": "© 2026 AgencyOne" }
+        }
+      ]
+    },
+    {
+      "id": "tenant1-about",
+      "domain": "tenant1.localhost",
+      "slug": "about",
+      "config": {
+        "theme": { "primary": "#3b82f6", "font": "Inter" },
+        "metadata": { "title": "Tenant 1 - About Us", "description": "Learn more about our agency" }
+      },
+      "components": [
+        {
+          "id": "t1-about-header",
+          "type": "Header",
+          "isLocked": true,
+          "props": { "title": "AgencyOne", "logo": "/logo.png" }
+        },
+        {
+          "id": "t1-about-hero",
+          "type": "Hero",
+          "isLocked": false,
+          "props": { "title": "About Us", "subtitle": "Our story and mission.", "ctaText": "Contact Us" }
+        },
+        {
+          "id": "t1-about-footer",
+          "type": "Footer",
+          "isLocked": true,
+          "props": { "copyright": "© 2026 AgencyOne" }
+        }
+      ]
+    },
+    {
+      "id": "tenant1-product",
+      "domain": "tenant1.localhost",
+      "slug": "product",
+      "config": {
+        "theme": { "primary": "#3b82f6", "font": "Inter" },
+        "metadata": { "title": "Tenant 1 - Products", "description": "Browse our latest products" }
+      },
+      "components": [
+        {
+          "id": "t1-product-header",
+          "type": "Header",
+          "isLocked": true,
+          "props": { "title": "AgencyOne", "logo": "/logo.png" }
+        },
+        {
+          "id": "t1-product-hero",
+          "type": "Hero",
+          "isLocked": false,
+          "props": { "title": "Our Products", "subtitle": "Quality items at affordable prices.", "ctaText": "Buy Now" }
+        },
+        {
+          "id": "t1-product-footer",
+          "type": "Footer",
+          "isLocked": true,
+          "props": { "copyright": "© 2026 AgencyOne" }
+        }
+      ]
+    },
+    {
+      "id": "tenant1-contact",
+      "domain": "tenant1.localhost",
+      "slug": "contact",
+      "config": {
+        "theme": { "primary": "#3b82f6", "font": "Inter" },
+        "metadata": { "title": "Tenant 1 - Contact", "description": "Get in touch with us" }
+      },
+      "components": [
+        {
+          "id": "t1-contact-header",
+          "type": "Header",
+          "isLocked": true,
+          "props": { "title": "AgencyOne", "logo": "/logo.png" }
+        },
+        {
+          "id": "t1-contact-hero",
+          "type": "Hero",
+          "isLocked": false,
+          "props": { "title": "Contact Us", "subtitle": "We'd love to hear from you.", "ctaText": "Email Us" }
+        },
+        {
+          "id": "t1-contact-footer",
+          "type": "Footer",
+          "isLocked": true,
+          "props": { "copyright": "© 2026 AgencyOne" }
+        }
+      ]
+    }
+  ]
+}

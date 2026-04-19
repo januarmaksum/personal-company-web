@@ -1,17 +1,12 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
+import { arrayMove } from "@dnd-kit/sortable";
 
 export interface ComponentData {
   id: string;
   type: string;
   isLocked: boolean;
   props: Record<string, any>;
-  layout: {
-    x: number;
-    y: number;
-    w: number;
-    h: number;
-  };
 }
 
 export interface PageConfig {
@@ -35,7 +30,7 @@ export interface EditorState {
   // Actions
   setPageData: (data: { id: string; domain: string; slug: string; config: PageConfig; components: ComponentData[] }) => void;
   updateComponentProps: (id: string, props: Record<string, any>) => void;
-  updateLayout: (layouts: { id: string; x: number; y: number; w: number; h: number }[]) => void;
+  moveComponent: (fromIndex: number, toIndex: number) => void;
   addComponent: (component: ComponentData) => void;
   removeComponent: (id: string) => void;
 }
@@ -63,12 +58,18 @@ export const useEditorStore = create<EditorState>()(
         )
       })),
 
-      updateLayout: (layouts) => set((state) => ({
-        components: state.components.map((c) => {
-          const layout = layouts.find((l) => l.id === c.id);
-          return layout ? { ...c, layout: { ...c.layout, ...layout } } : c;
-        })
-      })),
+      moveComponent: (fromIndex, toIndex) => set((state) => {
+        // Prevent moving locked elements
+        const compToMove = state.components[fromIndex];
+        const targetComp = state.components[toIndex];
+        if (compToMove.isLocked || targetComp.isLocked) {
+          return state;
+        }
+
+        return {
+          components: arrayMove(state.components, fromIndex, toIndex)
+        };
+      }),
 
       addComponent: (component) => set((state) => ({
         components: [...state.components, component]

@@ -1,0 +1,62 @@
+{
+  "pages": [
+    {
+      "id": "tenant2-home",
+      "domain": "tenant2.localhost",
+      "slug": "home",
+      "config": {
+        "theme": { "primary": "#10b981", "font": "Roboto" },
+        "metadata": { "title": "Tenant 2 - Home", "description": "Welcome" }
+      },
+      "components": [
+        {
+          "id": "t2-home-header",
+          "type": "Header",
+          "isLocked": true,
+          "props": { "title": "Jane Doe", "logo": "" }
+        },
+        {
+          "id": "t2-home-hero",
+          "type": "Hero",
+          "isLocked": false,
+          "props": { "title": "Hi, I am Jane", "subtitle": "Welcome to my portfolio", "ctaText": "View Works" }
+        },
+        {
+          "id": "t2-home-footer",
+          "type": "Footer",
+          "isLocked": true,
+          "props": { "copyright": "© 2026 Jane Doe" }
+        }
+      ]
+    },
+    {
+      "id": "tenant2-about",
+      "domain": "tenant2.localhost",
+      "slug": "about",
+      "config": {
+        "theme": { "primary": "#10b981", "font": "Roboto" },
+        "metadata": { "title": "Tenant 2 - About Me", "description": "My journey" }
+      },
+      "components": [
+        {
+          "id": "t2-about-header",
+          "type": "Header",
+          "isLocked": true,
+          "props": { "title": "Jane Doe", "logo": "" }
+        },
+        {
+          "id": "t2-about-hero",
+          "type": "Hero",
+          "isLocked": false,
+          "props": { "title": "About Me", "subtitle": "I am a fullstack web developer.", "ctaText": "Download CV" }
+        },
+        {
+          "id": "t2-about-footer",
+          "type": "Footer",
+          "isLocked": true,
+          "props": { "copyright": "© 2026 Jane Doe" }
+        }
+      ]
+    }
+  ]
+}
