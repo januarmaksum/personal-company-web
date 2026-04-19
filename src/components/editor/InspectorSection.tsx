@@ -2,9 +2,10 @@
 
 import React from "react";
 
-import { Palette } from "lucide-react";
+import { Palette, X } from "lucide-react";
 import { useShallow } from "zustand/shallow";
 
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
@@ -12,10 +13,12 @@ import { useEditorStore } from "@/store/editor/useEditorStore";
 
 interface InspectorSectionProps {
   selectedId: string | null;
+  onClose: () => void;
 }
 
 export const InspectorSection: React.FC<InspectorSectionProps> = ({
   selectedId,
+  onClose,
 }) => {
   const { components, updateComponentProps } = useEditorStore(
     useShallow((state) => ({
@@ -32,11 +35,21 @@ export const InspectorSection: React.FC<InspectorSectionProps> = ({
     <>
       <Separator className="my-6" />
       <div>
-        <div className="text-primary mb-4 flex items-center gap-2">
-          <Palette size={16} />
-          <h3 className="text-muted-foreground text-sm font-semibold tracking-widest uppercase">
-            Inspector
-          </h3>
+        <div className="text-primary mb-4 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Palette size={16} />
+            <h3 className="text-muted-foreground text-sm font-semibold tracking-widest uppercase">
+              Inspector
+            </h3>
+          </div>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={onClose}
+            className="h-6 w-6 cursor-pointer"
+          >
+            <X size={14} />
+          </Button>
         </div>
 
         <div className="space-y-4">

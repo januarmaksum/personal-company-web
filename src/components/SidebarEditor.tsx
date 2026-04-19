@@ -40,7 +40,10 @@ export const SidebarEditor: React.FC = () => {
 
         <NavigatorSection selectedId={selectedId} onSelect={setSelectedId} />
 
-        <InspectorSection selectedId={selectedId} />
+        <InspectorSection
+          selectedId={selectedId}
+          onClose={() => setSelectedId(null)}
+        />
       </ScrollArea>
     </aside>
   );

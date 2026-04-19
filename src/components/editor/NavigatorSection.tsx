@@ -2,11 +2,26 @@
 
 import React from "react";
 
-import { ChevronDown, ChevronRight, Layout, Plus, Trash2 } from "lucide-react";
+import {
+  DndContext,
+  DragEndEvent,
+  KeyboardSensor,
+  PointerSensor,
+  closestCenter,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
+import {
+  SortableContext,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
+import { Layout, Plus } from "lucide-react";
 import { useShallow } from "zustand/shallow";
 
 import { Button } from "@/components/ui/button";
 import { useEditorStore } from "@/store/editor/useEditorStore";
+
+import { NavigatorItem } from "./NavigatorItem";
 
 interface NavigatorSectionProps {
   selectedId: string | null;
@@ -17,12 +32,32 @@ export const NavigatorSection: React.FC<NavigatorSectionProps> = ({
   selectedId,
   onSelect,
 }) => {
-  const { components, removeComponent } = useEditorStore(
+  const { components, removeComponent, moveComponent } = useEditorStore(
     useShallow((state) => ({
       components: state.components,
       removeComponent: state.removeComponent,
+      moveComponent: state.moveComponent,
     })),
   );
+
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 5,
+      },
+    }),
+    useSensor(KeyboardSensor),
+  );
+
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+
+    if (over && active.id !== over.id) {
+      const oldIndex = components.findIndex((c) => c.id === active.id);
+      const newIndex = components.findIndex((c) => c.id === over.id);
+      moveComponent(oldIndex, newIndex);
+    }
+  };
 
   return (
     <div className="mb-6">
@@ -38,49 +73,28 @@ export const NavigatorSection: React.FC<NavigatorSectionProps> = ({
         </Button>
       </div>
 
-      <div className="space-y-1">
-        {components.map((comp) => (
-          <div
-            key={comp.id}
-            onClick={() => onSelect(comp.id)}
-            className={`group flex cursor-pointer items-center justify-between rounded-md p-2 transition-colors ${
-              selectedId === comp.id
-                ? "bg-accent text-accent-foreground font-medium"
-                : "hover:bg-muted text-muted-foreground"
-            }`}
+      <DndContext
+        sensors={sensors}
+        collisionDetection={closestCenter}
+        onDragEnd={handleDragEnd}
+      >
+        <div className="space-y-1">
+          <SortableContext
+            items={components.map((c) => c.id)}
+            strategy={verticalListSortingStrategy}
           >
-            <div className="flex items-center gap-2">
-              <span
-                className={
-                  selectedId === comp.id
-                    ? "text-primary"
-                    : "text-muted-foreground"
-                }
-              >
-                {selectedId === comp.id ? (
-                  <ChevronDown size={14} />
-                ) : (
-                  <ChevronRight size={14} />
-                )}
-              </span>
-              <span className="text-sm">{comp.type}</span>
-            </div>
-            {!comp.isLocked && (
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={(e: React.MouseEvent) => {
-                  e.stopPropagation();
-                  removeComponent(comp.id);
-                }}
-                className="text-muted-foreground hover:text-destructive h-6 w-6 opacity-0 transition-all group-hover:opacity-100"
-              >
-                <Trash2 size={14} />
-              </Button>
-            )}
-          </div>
-        ))}
-      </div>
+            {components.map((comp) => (
+              <NavigatorItem
+                key={comp.id}
+                comp={comp}
+                isSelected={selectedId === comp.id}
+                onSelect={(id) => onSelect(id)}
+                onRemove={(id) => removeComponent(id)}
+              />
+            ))}
+          </SortableContext>
+        </div>
+      </DndContext>
     </div>
   );
 };
