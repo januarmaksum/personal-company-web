@@ -82,6 +82,7 @@ interface RendererProps {
 
 export const Renderer: React.FC<RendererProps> = ({ components, editMode }) => {
   const { moveComponent } = useEditorStore();
+  const dndId = React.useId();
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -118,6 +119,7 @@ export const Renderer: React.FC<RendererProps> = ({ components, editMode }) => {
 
   return (
     <DndContext
+      id={dndId}
       sensors={sensors}
       collisionDetection={closestCenter}
       onDragEnd={handleDragEnd}
