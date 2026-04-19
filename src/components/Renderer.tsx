@@ -81,7 +81,7 @@ interface RendererProps {
 }
 
 export const Renderer: React.FC<RendererProps> = ({ components, editMode }) => {
-  const { moveComponent } = useEditorStore();
+  const moveComponent = useEditorStore((state) => state.moveComponent);
   const dndId = React.useId();
 
   const sensors = useSensors(
@@ -124,7 +124,7 @@ export const Renderer: React.FC<RendererProps> = ({ components, editMode }) => {
       collisionDetection={closestCenter}
       onDragEnd={handleDragEnd}
     >
-      <div className="flex flex-col w-full min-h-full pb-32">
+      <div className="flex flex-col w-full min-h-full">
         <SortableContext 
           items={items}
           strategy={verticalListSortingStrategy}

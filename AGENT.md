@@ -20,6 +20,7 @@ Read the relevant file from `.ai/skills/` based on the user's task before writin
 | "Build a complex app with many components" | `.ai/skills/web-artifacts-builder.md` |
 | "Create a poster / visual / graphic"       | `.ai/skills/canvas-design.md`         |
 | "Apply a theme / restyle this app"         | `.ai/skills/theme-factory.md`         |
+| "State management / Zustand store"          | `.ai/skills/zustand-state-management.md` |
 
 **Rules:**
 

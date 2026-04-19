@@ -6,11 +6,13 @@ import { Label } from "@/components/ui/label";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { useEditorStore } from "@/store/useEditorStore";
+import { useShallow } from "zustand/shallow";
 import {
   ChevronDown,
   ChevronRight,
   Layout,
   Palette,
+  PanelRightClose,
   Plus,
   Save,
   Settings,
@@ -26,7 +28,18 @@ export const SidebarEditor: React.FC = () => {
     removeComponent,
     domain,
     slug,
-  } = useEditorStore();
+    toggleSidebar,
+  } = useEditorStore(
+    useShallow((state) => ({
+      components: state.components,
+      config: state.config,
+      updateComponentProps: state.updateComponentProps,
+      removeComponent: state.removeComponent,
+      domain: state.domain,
+      slug: state.slug,
+      toggleSidebar: state.toggleSidebar,
+    }))
+  );
 
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [isSaving, setIsSaving] = useState(false);
@@ -68,11 +81,22 @@ export const SidebarEditor: React.FC = () => {
     <aside className="w-80 bg-background border-l h-full flex flex-col shadow-xl z-20">
       {/* Header */}
       <div className="p-4 border-b flex items-center justify-between sticky top-0 bg-background/95 backdrop-blur z-10">
-        <div>
-          <h2 className="text-xl font-bold tracking-tight">Editor</h2>
-          <p className="text-xs text-muted-foreground uppercase tracking-wider mt-1">
-            {domain} / {slug}
-          </p>
+        <div className="flex items-center gap-3">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={toggleSidebar}
+            title="Collapse Sidebar"
+            className="h-8 w-8 text-muted-foreground hover:text-foreground"
+          >
+            <PanelRightClose size={18} />
+          </Button>
+          <div>
+            <h2 className="text-xl font-bold tracking-tight">Editor</h2>
+            <p className="text-xs text-muted-foreground uppercase tracking-wider mt-0.5">
+              {domain} / {slug}
+            </p>
+          </div>
         </div>
         <Button
           onClick={handleSave}

@@ -27,12 +27,17 @@ export interface EditorState {
   config: PageConfig | null;
   components: ComponentData[];
   
+  isSidebarOpen: boolean;
+  _hasHydrated: boolean;
+  
   // Actions
+  setHasHydrated: (state: boolean) => void;
   setPageData: (data: { id: string; domain: string; slug: string; config: PageConfig; components: ComponentData[] }) => void;
   updateComponentProps: (id: string, props: Record<string, any>) => void;
   moveComponent: (fromIndex: number, toIndex: number) => void;
   addComponent: (component: ComponentData) => void;
   removeComponent: (id: string) => void;
+  toggleSidebar: () => void;
 }
 
 export const useEditorStore = create<EditorState>()(
@@ -43,6 +48,10 @@ export const useEditorStore = create<EditorState>()(
       slug: null,
       config: null,
       components: [],
+      isSidebarOpen: true,
+      _hasHydrated: false,
+
+      setHasHydrated: (hydrated) => set({ _hasHydrated: hydrated }),
 
       setPageData: (data) => set({ 
         pageId: data.id, 
@@ -78,10 +87,15 @@ export const useEditorStore = create<EditorState>()(
       removeComponent: (id) => set((state) => ({
         components: state.components.filter((c) => c.id !== id)
       })),
+
+      toggleSidebar: () => set((state) => ({ isSidebarOpen: !state.isSidebarOpen })),
     }),
     {
       name: "tenant-editor-storage",
       storage: createJSONStorage(() => localStorage),
+      onRehydrateStorage: () => (state) => {
+        state?.setHasHydrated(true);
+      },
       // Only persist components and config for drafts
       partialize: (state) => ({
         components: state.components,
