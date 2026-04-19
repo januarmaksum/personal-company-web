@@ -21,6 +21,7 @@ Read the relevant file from `.agents/skills/` based on the user's task before wr
 | "Create a poster / visual / graphic"       | `.agents/skills/canvas-design/SKILL.md`            |
 | "Apply a theme / restyle this app"         | `.agents/skills/theme-factory/SKILL.md`            |
 | "State management / Zustand store"         | `.agents/skills/zustand-state-management/SKILL.md` |
+| "UI Components / Design System / shadcn"   | `.agents/skills/shadcn/SKILL.md`                   |
 
 **Rules:**
 
