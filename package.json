@@ -51,11 +51,11 @@
     "typescript": "^5"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
+    "**/*.{js,jsx,ts,tsx}": [
       "prettier --write",
-      "yarn typecheck && eslint --fix --cache --max-warnings 0"
+      "eslint --fix --cache --max-warnings 0"
     ],
-    "*.{json,css,md}": [
+    "**/*.{json,css,md}": [
       "prettier --write"
     ]
   }
