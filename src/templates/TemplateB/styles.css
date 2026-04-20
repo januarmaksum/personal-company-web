@@ -1,0 +1,43 @@
+.template-b {
+  --primary: #00adb5;
+  --primary-foreground: #eeeeee;
+  --secondary: #393e46;
+  --secondary-foreground: #eeeeee;
+  --background: #ffffff;
+  --foreground: #222831;
+  --muted: #eeeeee;
+  --muted-foreground: #393e46;
+  font-family: "Outfit", "Inter", sans-serif;
+}
+
+.template-b .bg-primary {
+  background-color: var(--primary);
+}
+
+.template-b .text-primary {
+  color: var(--primary);
+}
+
+.template-b .hover\:bg-primary:hover {
+  background-color: #00979e; /* Slightly darker for hover */
+}
+
+.template-b .border-primary {
+  border-color: var(--primary);
+}
+
+.template-b .bg-dark {
+  background-color: #222831;
+}
+
+.template-b .text-dark {
+  color: #222831;
+}
+
+.template-b .bg-secondary {
+  background-color: #393e46;
+}
+
+.template-b .bg-light {
+  background-color: #eeeeee;
+}
