@@ -6,7 +6,7 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "lint": "yarn typecheck && eslint --max-warnings 0",
-    "lint:fix": "eslint --fix",
+    "lint:fix": "eslint --fix . && yarn typecheck",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "typecheck": "tsc --noEmit",
